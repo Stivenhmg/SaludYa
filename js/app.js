@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    // Protección
+
     const paginasProtegidas = [
 
         "agendar.html",
@@ -28,16 +30,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
         &&
 
-        !logueado
+        logueado !== "true"
 
     ) {
 
         window.location.href =
             "login.html";
 
+        return;
+
     }
 
 
+    // Login
 
     const loginForm =
         document.querySelector(
@@ -55,16 +60,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 const correo =
                     loginForm.querySelector(
                         'input[type="email"]'
-                    ).value;
+                    ).value.trim();
 
                 const password =
                     loginForm.querySelector(
                         'input[type="password"]'
-                    ).value;
+                    ).value.trim();
 
                 if (
+
                     correo === ""
+
                     ||
+
                     password === ""
 
                 ) {
@@ -77,19 +85,65 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 }
 
+                const correoGuardado =
+                    localStorage.getItem(
+                        "correoRegistrado"
+                    );
+
+                const passwordGuardada =
+                    localStorage.getItem(
+                        "passwordRegistrada"
+                    );
+
+                if (
+
+                    !correoGuardado
+
+                    ||
+
+                    !passwordGuardada
+
+                ) {
+
+                    alert(
+                        "No hay usuarios registrados"
+                    );
+
+                    return;
+
+                }
+
+                if (
+
+                    correo !== correoGuardado
+
+                    ||
+
+                    password !== passwordGuardada
+
+                ) {
+
+                    alert(
+                        "Correo o contraseña incorrectos"
+                    );
+
+                    return;
+
+                }
+
                 localStorage.setItem(
                     "usuarioLogueado",
                     "true"
                 );
 
-                const nombre =
+                localStorage.setItem(
+
+                    "usuarioActivo",
+
                     localStorage.getItem(
                         "nombreUsuario"
-                    );
+                    )
 
-                localStorage.setItem(
-                    "usuarioActivo",
-                    nombre
                 );
 
                 window.location.href =
@@ -100,6 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+    // Registro
 
     const registroForm =
         document.querySelector(
@@ -121,7 +176,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 for (let campo of inputs) {
 
-                    if (campo.value === "") {
+                    if (
+
+                        campo.value.trim()
+
+                        === ""
+
+                    ) {
 
                         alert(
                             "Completa todos los campos"
@@ -133,13 +194,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 }
 
+                const nombre =
+                    inputs[0].value.trim();
+
+                const correo =
+                    inputs[2].value.trim();
+
                 const password =
                     inputs[3].value;
 
                 const confirmar =
                     inputs[4].value;
 
-                if (password !== confirmar) {
+                if (
+
+                    password !== confirmar
+
+                ) {
 
                     alert(
                         "Las contraseñas no coinciden"
@@ -149,12 +220,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 }
 
-                const nombre =
-                    inputs[0].value;
-
                 localStorage.setItem(
                     "nombreUsuario",
                     nombre
+                );
+
+                localStorage.setItem(
+                    "correoRegistrado",
+                    correo
+                );
+
+                localStorage.setItem(
+                    "passwordRegistrada",
+                    password
                 );
 
                 alert(
@@ -169,6 +247,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+    // Navbar
 
     const nombreNav =
         document.querySelector(
@@ -185,17 +264,27 @@ document.addEventListener("DOMContentLoaded", () => {
             ".login-btn"
         );
 
-    const nombre =
+    const usuarioActivo =
         localStorage.getItem(
             "usuarioActivo"
         );
 
-    if (nombre) {
+    if (
+
+        usuarioActivo
+
+        &&
+
+        localStorage.getItem(
+            "usuarioLogueado"
+        ) === "true"
+
+    ) {
 
         if (nombreNav) {
 
             nombreNav.textContent =
-                nombre;
+                usuarioActivo;
 
         }
 
@@ -239,62 +328,73 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+    // Logout
 
-    const logoutBtns =
-        document.querySelectorAll(
+    document
+        .querySelectorAll(
             ".logout-btn"
+        )
+        .forEach(
+
+            btn => {
+
+                btn.addEventListener(
+                    "click",
+                    () => {
+
+                        localStorage.removeItem(
+                            "usuarioLogueado"
+                        );
+
+                        localStorage.removeItem(
+                            "usuarioActivo"
+                        );
+
+                        window.location.href =
+                            "index.html";
+
+                    });
+
+            }
+
         );
 
-    logoutBtns.forEach(
-        btn => {
 
-            btn.addEventListener(
-                "click",
-                () => {
-
-                    localStorage.removeItem(
-                        "usuarioLogueado"
-                    );
-
-                    localStorage.removeItem(
-                        "usuarioActivo"
-                    );
-
-                    window.location.href =
-                        "login.html";
-
-                });
-
-        });
-
-
+    // Horarios
 
     const horas =
         document.querySelectorAll(
             ".hour-btn"
         );
 
-    horas.forEach(btn => {
+    horas.forEach(
 
-        btn.addEventListener(
-            "click",
-            () => {
+        btn => {
 
-                horas.forEach(
-                    h => h.classList.remove(
+            btn.addEventListener(
+                "click",
+                () => {
+
+                    horas.forEach(
+
+                        h => h.classList.remove(
+                            "selected"
+                        )
+
+                    );
+
+                    btn.classList.add(
                         "selected"
-                    )
-                );
+                    );
 
-                btn.classList.add(
-                    "selected"
-                );
+                });
 
-            });
+        }
 
-    });
+    );
 
 
+    // Agendar cita
 
     const agendarForm =
         document.querySelector(
@@ -324,7 +424,11 @@ document.addEventListener("DOMContentLoaded", () => {
                         .toISOString()
                         .split("T")[0];
 
-                if (fecha < hoy) {
+                if (
+
+                    fecha < hoy
+
+                ) {
 
                     alert(
                         "No puedes seleccionar fechas pasadas"
@@ -352,31 +456,27 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (!hora) {
 
                     alert(
-                        "Selecciona hora"
+                        "Selecciona una hora"
                     );
 
                     return;
 
                 }
 
-                const cita = {
-
-                    servicio,
-
-                    fecha,
-
-                    hora:
-                        hora.textContent
-
-                };
-
                 localStorage.setItem(
 
                     "citaActual",
 
-                    JSON.stringify(
-                        cita
-                    )
+                    JSON.stringify({
+
+                        servicio,
+
+                        fecha,
+
+                        hora:
+                            hora.textContent
+
+                    })
 
                 );
 
@@ -388,18 +488,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+    // Confirmación
 
     const cita =
-        localStorage.getItem(
-            "citaActual"
+        JSON.parse(
+
+            localStorage.getItem(
+                "citaActual"
+            )
+
         );
 
     if (cita) {
-
-        const datos =
-            JSON.parse(
-                cita
-            );
 
         const servicio =
             document.getElementById(
@@ -419,19 +519,20 @@ document.addEventListener("DOMContentLoaded", () => {
         if (servicio) {
 
             servicio.textContent =
-                datos.servicio;
+                cita.servicio;
 
             fecha.textContent =
-                datos.fecha;
+                cita.fecha;
 
             hora.textContent =
-                datos.hora;
+                cita.hora;
 
         }
 
     }
 
 
+    // Mis citas
 
     const contenedor =
         document.getElementById(
@@ -465,11 +566,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <div class="appointment-top">
 
-<h3>
-
-${cita.servicio}
-
-</h3>
+<h3>${cita.servicio}</h3>
 
 <span class="status-ok">
 
@@ -479,17 +576,9 @@ Confirmada
 
 </div>
 
-<p>
+<p>${cita.fecha}</p>
 
-${cita.fecha}
-
-</p>
-
-<p>
-
-${cita.hora}
-
-</p>
+<p>${cita.hora}</p>
 
 <hr>
 
@@ -506,6 +595,7 @@ Cancelar cita
     }
 
 
+    // Cancelar cita
 
     document.addEventListener(
         "click",
