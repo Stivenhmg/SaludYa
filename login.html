@@ -8,11 +8,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>
-
-        Registro | SaludYa
-
-    </title>
+    <title>Ingresar | SaludYa</title>
 
     <link rel="stylesheet" href="css/styles.css">
 
@@ -20,19 +16,13 @@
 
 <body>
 
-
     <header class="navbar">
 
         <div class="logo">
 
-            <h2>
-
-                SaludYa
-
-            </h2>
+            <h2>SaludYa</h2>
 
         </div>
-
 
         <nav class="nav-menu">
 
@@ -62,63 +52,53 @@
 
         </nav>
 
-
         <div class="nav-user">
 
-            <a href="login.html" class="nav-btn">
+            <span class="nav-username">
+
+            </span>
+
+            <a href="login.html" class="login-btn">
 
                 Ingresar
 
             </a>
 
-        </div>
+            <button class="logout-btn" style="display:none;">
 
+                Salir
+
+            </button>
+
+        </div>
 
     </header>
 
 
-
     <main class="center-page">
 
+        <div class="login-card">
 
-        <div class="register-card">
+            <div class="login-icon">
 
+                🔐
+
+            </div>
 
             <h1>
 
-                Crear cuenta
+                Bienvenido
 
             </h1>
 
-
             <p>
 
-                Completa tus datos para registrarte
+                Ingresa tus datos para continuar
 
             </p>
 
 
-
-            <form class="register-form">
-
-
-                <label>
-
-                    Nombre
-
-                </label>
-
-                <input type="text" placeholder="Tu nombre" required>
-
-
-                <label>
-
-                    Apellido
-
-                </label>
-
-                <input type="text" placeholder="Tu apellido" required>
-
+            <form class="login-form">
 
                 <label>
 
@@ -126,8 +106,7 @@
 
                 </label>
 
-                <input type="email" placeholder="correo@ejemplo.com" required>
-
+                <input type="email" placeholder="correo@ejemplo.com">
 
                 <label>
 
@@ -135,50 +114,32 @@
 
                 </label>
 
-                <input type="password" placeholder="*******" required>
-
-
-                <label>
-
-                    Confirmar contraseña
-
-                </label>
-
-                <input type="password" placeholder="*******" required>
-
+                <input type="password" placeholder="********">
 
                 <button type="submit" class="primary-btn">
 
-                    Registrarse
+                    Ingresar
 
                 </button>
-
 
             </form>
 
 
+            <p class="register-link">
 
-            <div class="login-footer">
+                ¿No tienes cuenta?
 
+                <a href="registro.html">
 
-                ¿Ya tienes cuenta?
-
-
-                <a href="login.html">
-
-                    Inicia sesión
+                    Registrarse
 
                 </a>
 
-
-            </div>
-
+            </p>
 
         </div>
 
-
     </main>
-
 
     <script src="js/app.js"></script>
 

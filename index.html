@@ -1,31 +1,198 @@
 <!DOCTYPE html>
+
 <html lang="es">
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SaludYa Login</title>
+    <title>
 
-<link rel="stylesheet"
-href="css/styles.css">
+        SaludYa
+
+    </title>
+
+    <link rel="stylesheet" href="css/styles.css">
 
 </head>
 
 <body>
 
-<script src="js/app.js"></script>
 
-<div class="login-container">
-    <h1>Iniciar Sesión</h1>
-    <p>Inicia sesion para continuar</p>
-    <input type="email" placeholder="Correo Electrónico">
-    <input type="password" placeholder="Contraseña">
-    <button id="button1">Iniciar Sesión</button>
-</div>
+    <header class="navbar">
+
+        <div class="logo">
+
+            <h2>SaludYa</h2>
+
+        </div>
+
+        <nav class="nav-menu">
+
+            <a href="index.html">Inicio</a>
+
+            <a href="horarios.html">Horarios</a>
+
+            <a href="agendar.html">Agendar</a>
+
+            <a href="citas.html">Mis citas</a>
+
+        </nav>
+
+        <div class="nav-user">
+
+            <span class="nav-username"></span>
+
+            <a href="login.html" class="login-btn primary-btn">
+
+                Ingresar
+
+            </a>
+
+            <button class="logout-btn primary-btn" style="display:none;">
+
+                Salir
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <main class="hero-section">
+
+
+        <div class="hero-badge">
+
+            Disponible para agendar
+
+        </div>
+
+
+        <h1>
+
+            Agenda tu cita fácilmente
+
+        </h1>
+
+
+        <p>
+
+            Reserva en segundos, sin complicaciones.
+
+            Elige el horario que mejor se adapte a ti.
+
+        </p>
+
+
+
+        <div class="hero-buttons">
+
+
+            <a href="agendar.html" class="primary-btn">
+
+                Agendar ahora
+
+            </a>
+
+
+
+            <a href="horarios.html" class="secondary-btn">
+
+                Ver horarios
+
+            </a>
+
+
+        </div>
+
+
+
+        <div class="features-grid">
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+
+                    ⏱
+
+                </div>
+
+                <h3>
+
+                    Rápido
+
+                </h3>
+
+                <p>
+
+                    Agenda en menos de un minuto
+
+                </p>
+
+            </div>
+
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+
+                    🛡
+
+                </div>
+
+                <h3>
+
+                    Seguro
+
+                </h3>
+
+                <p>
+
+                    Tu información protegida
+
+                </p>
+
+            </div>
+
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+
+                    ✓
+
+                </div>
+
+                <h3>
+
+                    Confirmación
+
+                </h3>
+
+                <p>
+
+                    Confirmación instantánea
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+
+    <script src="js/app.js"></script>
 
 </body>
 
